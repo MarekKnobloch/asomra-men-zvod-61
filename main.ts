@@ -1,16 +1,23 @@
 radio.setGroup(94)
-Sensors.SetLightLevel()
-input.onButtonPressed(Button.A, function () {
-    Sensors.SetLightLevel()
+
+input.onButtonPressed(Button.A, function() {
+     Sensors.SetLightLevel()
+     basic.clearScreen()
 })
 let start: boolean = false
 Sensors.OnLightDrop(function () {
     if(!start)
-    basic.showString("start")
+    basic.showString("s")
     radio.sendNumber(1)
     start = true
 })
-
-radio.onReceivedNumber(function (receivedNumber) {
-
+input.onButtonPressed(Button.B, function() {
+    start = false
+})
+radio.onReceivedNumber(function (finalTime) {
+    if(start){
+        console.log(finalTime)
+        basic.showNumber(finalTime)
+        
+    }
 })
